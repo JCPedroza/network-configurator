@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <title>Network Configurator</title>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="styles/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body>
+  <main>
+    <!-- Fixed-top navigation bar. -->
+    <nav class="navbar navbar-default bg-light fixed-top">
+      <div class="container">
+        <input type="radio" id="rad-isswitch" class="btn-check" name="device-type" value="switch" checked>
+        <label for="rad-isswitch" class="btn btn-outline-primary">Switch</label>
+
+        <input type="radio" id="rad-isrouter" class="btn-check" name="device-type" value="router">
+        <label for="rad-isrouter" class="btn btn-outline-primary">Router</label>
+
+        <input type="radio" id="rad-ismls" class="btn-check" name="device-type" value="mls">
+        <label for="rad-ismls" class="btn btn-outline-primary">MLS</label>
+      </div>
+    </nav>
+
+    <form class="container">
+      <!-- Command blocks are dynamically populated here. -->
+      <div id="command-block-container" class="row"></div>
+    </form>
+  </main>
+
+  <script src="scripts/bootstrap/bootstrap.bundle.min.js"></script>
+  <script type="module" src="./scripts/main.js"></script>
+</body>
+</html>
