@@ -32,6 +32,10 @@ class TextInput {
     element.placeholder = this.placeholder
     return element
   }
+
+  getValue () {
+    return this.html.value
+  }
 }
 
 class SwitchInput {
@@ -51,13 +55,17 @@ class SwitchInput {
     element.checked = this.checked
     return element
   }
+
+  getValue () {
+    return this.html.checked
+  }
 }
 
 class TextField {
   constructor (labelText, id) {
     this.input = new TextInput('text', id)
     this.label = new Label(labelText, id, ['form-label'])
-    this.classList = ['form-field', 'form-floating']
+    this.classList = ['mb-3', 'form-field', 'form-floating']
     this.html = this.createHtml()
   }
 
@@ -67,6 +75,10 @@ class TextField {
     element.appendChild(this.input.html)
     element.appendChild(this.label.html)
     return element
+  }
+
+  getValue () {
+    return this.input.getValue()
   }
 }
 
@@ -74,7 +86,7 @@ class PasswordField {
   constructor (labelText, id) {
     this.input = new TextInput('password', id)
     this.label = new Label(labelText, id, ['form-label'])
-    this.classList = ['form-field', 'form-floating']
+    this.classList = ['mb-3', 'form-field', 'form-floating']
     this.html = this.createHtml()
   }
 
@@ -84,6 +96,10 @@ class PasswordField {
     element.appendChild(this.input.html)
     element.appendChild(this.label.html)
     return element
+  }
+
+  getValue () {
+    return this.input.getValue()
   }
 }
 
@@ -91,7 +107,7 @@ class SwitchField {
   constructor (labelText, id, checked) {
     this.input = new SwitchInput(id, checked)
     this.label = new Label(labelText, id, ['form-check-label'])
-    this.classList = ['form-field', 'form-check', 'form-switch']
+    this.classList = ['mb-3', 'form-field', 'form-check', 'form-switch']
     this.html = this.createHtml()
   }
 
@@ -101,6 +117,10 @@ class SwitchField {
     element.appendChild(this.input.html)
     element.appendChild(this.label.html)
     return element
+  }
+
+  getValue () {
+    return this.input.getValue()
   }
 }
 

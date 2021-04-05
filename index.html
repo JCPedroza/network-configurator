@@ -9,6 +9,7 @@
 
   <link rel="stylesheet" href="styles/bootstrap/bootstrap.min.css">
   <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/form.css">
 </head>
 
 <body>
@@ -16,6 +17,8 @@
     <!-- Fixed-top navigation bar. -->
     <nav class="navbar navbar-default bg-light fixed-top">
       <div class="container">
+        <button type="button" id="btn-generate" class="btn btn-primary">Generate</button>
+
         <input type="radio" id="rad-isswitch" class="btn-check" name="device-type" value="switch" checked>
         <label for="rad-isswitch" class="btn btn-outline-primary">Switch</label>
 
@@ -30,7 +33,16 @@
     <form class="container">
       <!-- Command blocks are dynamically populated here. -->
       <div id="command-block-container" class="row"></div>
+
+      <!-- Output is printed here. -->
+      <div class="col-12">
+        <button type="button" id="btn-copy" class="btn btn-primary">Copy</button>
+        <button type="button" id="btn-clear" class="btn btn-primary">Clear</button>
+        <button type="button" id="btn-edit" class="btn btn-primary">Edit</button>
+        <textarea id="txa-output" class="font-monospace" readonly></textarea>
+      </div>
     </form>
+
   </main>
 
   <script src="scripts/bootstrap/bootstrap.bundle.min.js"></script>

@@ -1,27 +1,39 @@
-import { Block } from './blocks.js'
+import basicGlobal from './command-blocks/basic-global.js'
+import ssh from './command-blocks/ssh.js'
 
-const blockContainer = document.getElementById('command-block-container')
+const blockBox = document.getElementById('command-block-container')
+const txaOutput = document.getElementById('txa-output')
 
-const textSpec = {
-  type: 'text',
-  label: 'text input',
-  id: 'one'
+const btnGenerate = document.getElementById('btn-generate')
+const btnCopy = document.getElementById('btn-copy')
+const btnClear = document.getElementById('btn-clear')
+const btnEdit = document.getElementById('btn-edit')
+
+const activeBlocks = [basicGlobal, ssh]
+
+btnGenerate.onclick = () => {
+  const reducer = (acc, cur) => `${acc}${cur.generate()}\n`
+  const initialValue = ''
+  txaOutput.value = activeBlocks.reduce(reducer, initialValue)
 }
 
-const pswSpec = {
-  type: 'password',
-  label: 'password input',
-  id: 'two'
+btnCopy.onclick = () => {
+  navigator.clipboard
+    .writeText(txaOutput.value)
+    .then((result) => console.log(result))
+    .catch((error) => console.log(error))
 }
 
-const swtSpec = {
-  type: 'switch',
-  label: 'switch input',
-  id: 'three'
+btnClear.onclick = () => {
+  txaOutput.value = ''
 }
 
-const inputSpecs = [textSpec, pswSpec, swtSpec]
+btnEdit.onclick = () => {
+  if (txaOutput.readOnly === true) {
+    txaOutput.readOnly = false
+  } else {
+    txaOutput.readOnly = true
+  }
+}
 
-const block = new Block('four', 'Block', inputSpecs)
-
-blockContainer.appendChild(block.html)
+activeBlocks.forEach((block) => blockBox.appendChild(block.html))

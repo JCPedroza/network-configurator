@@ -1,21 +1,10 @@
-import { TextField, PasswordField, SwitchField } from './inputs.js'
-
-const createBlockInput = (type, label, id) => {
-  if (type === 'text') {
-    return new TextField(label, id)
-  } else if (type === 'password') {
-    return new PasswordField(label, id)
-  } else if (type === 'switch') {
-    return new SwitchField(label, id, true)
-  }
-}
-
 class Block {
-  constructor (id, title, inputSpecs) {
+  constructor (id, title, commandList, targetList) {
     this.id = id
     this.title = title
-    this.inputSpecs = inputSpecs
-    this.classList = ['col-12', 'col-md-6', 'col-lg-4', 'code-block']
+    this.commandList = commandList
+    this.targetList = targetList
+    this.classList = ['col-12', 'col-md-6', 'col-lg-4', 'cmd-block']
     this.html = this.createHtml()
   }
 
@@ -27,12 +16,18 @@ class Block {
     this.classList.forEach((cls) => fieldset.classList.add(cls))
 
     fieldset.appendChild(legend)
-    this.inputSpecs.forEach((spec) => {
-      const input = createBlockInput(spec.type, spec.label, spec.id).html
-      fieldset.appendChild(input)
+    this.commandList.forEach((cmd) => {
+      const cmdFields = cmd.fieldList.map((field) => field.html)
+      cmdFields.forEach((field) => fieldset.appendChild(field))
     })
 
     return fieldset
+  }
+
+  generate () {
+    const reducer = (acc, cur) => `${acc}${cur.generate()}`
+    const initialValue = ''
+    return this.commandList.reduce(reducer, initialValue)
   }
 }
 
